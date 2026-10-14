@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="黎川树洞官方主页 · 心理树洞伙伴，你的心事有回应">
+<meta name="theme-color" content="#1c4532">
+<link rel="icon" href="avatar.jpg" type="image/jpeg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="黎川树洞 · 官方主页">
+<meta property="og:description" content="心理树洞伙伴 | 你的心事有回应">
+<meta property="og:image" content="avatar.jpg">
+<meta property="og:site_name" content="黎川树洞">
+<title>黎川树洞 · 官方主页</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- 开场动画 · 3秒品牌小短片（进入即播放，点击可跳过） -->
+<div id="intro" aria-hidden="true">
+  <span class="tw t1">✦</span><span class="tw t2 c">✦</span><span class="tw t3 p">✦</span><span class="tw t4 s">✦</span>
+  <span class="tw t5 c">✦</span><span class="tw t6 p">✦</span><span class="tw t7 s">✦</span><span class="tw t8">✦</span>
+  <div class="intro-inner">
+    <div class="intro-scene">
+      <div class="intro-tree">
+        <div class="intro-hole">
+          <div class="face">
+            <span class="eye l"></span><span class="eye r"></span>
+            <span class="smile"></span>
+          </div>
+        </div>
+      </div>
+      <span class="petal p1"></span><span class="petal p2"></span><span class="petal p3"></span><span class="petal p4"></span>
+      <span class="petal p5"></span><span class="petal p6"></span><span class="petal p7"></span><span class="petal p8"></span>
+    </div>
+    <div class="intro-title"><span>黎</span><span>川</span><span>树</span><span>洞</span></div>
+    <div class="intro-sub">心理树洞伙伴 · 你的心事有回应</div>
+  </div>
+  <button id="intro-skip" type="button">跳过 ›</button>
+</div>
+
+<!-- 流光背景 -->
+<canvas id="bg-lines"></canvas>
+
+<!-- 卡通顶栏 -->
+<div class="topbar">
+  <div class="top-left">
+    <a class="top-login" href="admin.html" title="管理员登入">🔑 登入</a>
+    <a class="brand" href="index.html">黎川<span>树洞</span></a>
+  </div>
+  <nav>
+    <a href="投稿.html">投稿标准</a>
+    <a href="赞助.html">赞助</a>
+  </nav>
+</div>
+
+<div class="layout">
+
+<!-- 站点公告（管理员在面板发布后显示） -->
+<div id="announce-bar" class="announce hidden">
+  <span class="a-icon">📢</span>
+  <span class="a-text"></span>
+  <button class="a-close" type="button" aria-label="关闭公告">×</button>
+</div>
+
+  <!-- 左侧：团队 -->
+  <aside class="side left">
+    <div class="panel team">
+      <h3>🛠️ 开发团队</h3>
+      <ul aria-label="开发团队成员">
+        <li><img class="avatar" src="avatar-lichuan.jpg" alt="黎川树洞的头像" width="36" height="36">黎川树洞</li>
+      </ul>
+    </div>
+    <div class="panel team">
+      <h3>🛡️ 管理团队</h3>
+      <ul aria-label="管理团队成员">
+        <li><img class="avatar" src="avatar-bayue.jpg" alt="八月的头像" width="36" height="36">八月</li>
+        <li><img class="avatar" src="avatar-taoyu.jpg" alt="桃屿的头像" width="36" height="36">桃屿</li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- 中间：主内容 -->
+  <div class="center">
+
+    <header>
+      <div class="avatar-ring"><img src="avatar.jpg" alt="黎川树洞头像" width="142" height="142"></div>
+      <h1>黎川<span>树洞</span></h1>
+      <p class="slogan">心理树洞伙伴 | 你的心事有回应</p>
+    </header>
+
+    <main>
+      <section class="reveal">
+        <h2>社交媒体</h2>
+        <div class="cards">
+          <a class="card" href="douyin.jpg" target="_blank">
+            <div class="top"><div class="tag">🎵</div><div class="name">抖音 · 黎川树洞</div></div>
+            <div class="desc">抖音号：LiChuanBBQ · 点击查看二维码，打开抖音扫一扫关注</div>
+            <span class="btn">查看二维码</span>
+          </a>
+          <a class="card" href="kuaishou.jpg" target="_blank">
+            <div class="top"><div class="tag">⚡</div><div class="name">快手 · 黎川树洞</div></div>
+            <div class="desc">快手ID：4113236617 · 点击查看二维码，打开快手扫一扫关注</div>
+            <span class="btn">查看二维码</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <h2>QQ 联系</h2>
+        <div class="cards">
+          <a class="card" href="https://qm.qq.com/q/Gqr6dBUyKA" target="_blank">
+            <div class="top"><div class="tag">🐧</div><div class="name">加我为 QQ 好友</div></div>
+            <div class="desc">心事投稿、合作咨询，点这里直接添加树洞为好友</div>
+            <span class="btn">添加好友</span>
+          </a>
+          <a class="card" href="https://qm.qq.com/q/JdlgQncayc" target="_blank">
+            <div class="top"><div class="tag">👥</div><div class="name">黎川树洞①群</div></div>
+            <div class="desc">一群：加入黎川树洞大家庭，一起聊天吐槽</div>
+            <span class="btn">加入群聊</span>
+          </a>
+          <a class="card" href="https://qm.qq.com/q/ozNorzWFvq" target="_blank">
+            <div class="top"><div class="tag">👥</div><div class="name">黎川树洞②群</div></div>
+            <div class="desc">二群：一群满了？来这里同样欢迎你</div>
+            <span class="btn">加入群聊</span>
+          </a>
+          <a class="card" href="https://pd.qq.com/s/95s6shgkh?b=9" target="_blank">
+            <div class="top"><div class="tag">📢</div><div class="name">腾讯频道 · 黎川树洞</div></div>
+            <div class="desc">加入树洞官方频道，获取最新动态与更多互动玩法</div>
+            <span class="btn">加入频道</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <h2>投稿专区</h2>
+        <div class="cards">
+          <a class="card" href="投稿.html">
+            <div class="top"><div class="tag">📝</div><div class="name">投稿审核标准</div></div>
+            <div class="desc">投稿前花一分钟读一读——什么一定发、什么不会发、怎样过审更快，还有 1 分钟自查清单</div>
+            <span class="btn">查看审核标准</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <h2>赞助支持</h2>
+        <div class="cards">
+          <a class="card sponsor" href="赞助.html">
+            <div class="top"><div class="tag">❤️</div><div class="name">赞助树洞</div></div>
+            <div class="desc">如果树洞陪伴过你，欢迎请树洞喝杯奶茶～ 微信 / 支付宝均可</div>
+            <span class="btn">查看赞助方式</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer>© <span id="year">2026</span> 黎川树洞 · 本页面为官方主页</footer>
+  </div>
+
+  <!-- 右侧：音乐 -->
+  <aside class="side right">
+    <div class="panel music">
+      <h3>🎶 树洞电台</h3>
+      <div class="disc" id="music-disc"><div class="disc-center">🎧</div></div>
+      <p class="music-name" id="music-name">黎川树洞 · 背景音乐</p>
+      <div class="music-controls">
+        <button id="music-btn" type="button" title="播放/暂停" aria-label="播放或暂停背景音乐">▶</button>
+      </div>
+      <p class="music-hint" id="music-hint">点击开启音乐</p>
+      <audio id="bg-music" src="music.mp3" loop preload="none"></audio>
+    </div>
+  </aside>
+
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

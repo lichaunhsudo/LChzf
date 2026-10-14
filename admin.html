@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1c4532">
+<link rel="icon" href="avatar.jpg" type="image/jpeg">
+<title>管理员面板 · 黎川树洞</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<canvas id="bg-lines"></canvas>
+
+<div class="admin-wrap">
+  <div class="admin-top">
+    <a class="back-site" href="index.html">← 返回官网</a>
+    <button class="abtn ghost hidden" id="logoutBtn" type="button">退出登录</button>
+  </div>
+
+  <!-- ===== 登录视图 ===== -->
+  <div class="admin-card" id="loginView">
+    <h2>🔐 管理员登入</h2>
+    <form id="loginForm">
+      <div class="field">
+        <label for="admUser">账号</label>
+        <input id="admUser" autocomplete="username" required>
+      </div>
+      <div class="field">
+        <label for="admPass">密码</label>
+        <input id="admPass" type="password" autocomplete="current-password" required>
+      </div>
+      <button class="abtn" type="submit">登 录</button>
+      <p class="form-msg" id="loginMsg"></p>
+    </form>
+  </div>
+
+  <!-- ===== 面板视图 ===== -->
+  <div id="panelView" class="hidden">
+
+    <div class="admin-card">
+      <h2>📊 访问统计</h2>
+      <div class="stat-grid">
+        <div class="stat-box"><div class="n" id="statTotal">-</div><div class="l">累计访问</div></div>
+        <div class="stat-box"><div class="n" id="statToday">-</div><div class="l">今日访问</div></div>
+      </div>
+      <p class="ann-status" id="statDay"></p>
+    </div>
+
+    <div class="admin-card">
+      <h2>📢 公告管理</h2>
+      <div class="field">
+        <label for="annText">公告内容（显示在官网顶部，全体访客可见）</label>
+        <textarea id="annText" placeholder="例如：今晚 21:00 树洞电台特别节目，不见不散～"></textarea>
+      </div>
+      <div class="admin-row">
+        <button class="abtn" id="annSave" type="button">发布 / 更新公告</button>
+        <button class="abtn danger" id="annClear" type="button">撤下公告</button>
+      </div>
+      <p class="ann-status" id="annStatus">当前：无公告</p>
+      <p class="form-msg" id="annMsg"></p>
+    </div>
+
+    <div class="admin-card">
+      <h2>🔑 修改密码</h2>
+      <form id="pwdForm">
+        <div class="field">
+          <label for="pwdOld">原密码</label>
+          <input id="pwdOld" type="password" autocomplete="current-password" required>
+        </div>
+        <div class="field">
+          <label for="pwdNew">新密码（至少 4 位）</label>
+          <input id="pwdNew" type="password" autocomplete="new-password" required>
+        </div>
+        <div class="field">
+          <label for="pwdNew2">确认新密码</label>
+          <input id="pwdNew2" type="password" autocomplete="new-password" required>
+        </div>
+        <button class="abtn" type="submit">修改密码</button>
+        <p class="form-msg" id="pwdMsg"></p>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var token = null;
+  try { token = sessionStorage.getItem('shudong-admin') || null; } catch (e) {}
+
+  function api(method, path, data) {
+    var headers = { 'Content-Type': 'application/json' };
+    if (token) headers['Authorization'] = 'Bearer ' + token;
+    return fetch(path, {
+      method: method, headers: headers,
+      body: data ? JSON.stringify(data) : undefined
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        if (!r.ok) throw new Error(j.error || '请求失败');
+        return j;
+      });
+    });
+  }
+
+  function showPanel() {
+    $('loginView').classList.add('hidden');
+    $('panelView').classList.remove('hidden');
+    $('logoutBtn').classList.remove('hidden');
+    refresh();
+  }
+  function showLogin() {
+    $('panelView').classList.add('hidden');
+    $('loginView').classList.remove('hidden');
+    $('logoutBtn').classList.add('hidden');
+  }
+  function msg(el, text, ok) { el.textContent = text; el.className = 'form-msg ' + (ok ? 'ok' : 'err'); }
+
+  $('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    api('POST', '/api/site/login', {
+      username: $('admUser').value.trim(),
+      password: $('admPass').value
+    }).then(function (r) {
+      token = r.token;
+      try { sessionStorage.setItem('shudong-admin', token); } catch (e) {}
+      showPanel();
+    }).catch(function (err) { msg($('loginMsg'), err.message, 0); });
+  });
+
+  $('logoutBtn').addEventListener('click', function () {
+    try { sessionStorage.removeItem('shudong-admin'); } catch (e) {}
+    token = null;
+    showLogin();
+  });
+
+  function refresh() {
+    api('GET', '/api/site/stats').then(function (s) {
+      $('statTotal').textContent = s.total;
+      $('statToday').textContent = s.today;
+      $('statDay').textContent = '统计日期：' + (s.day || '今天');
+      if (s.announce && s.announce.text) {
+        $('annText').value = s.announce.text;
+        $('annStatus').textContent = '当前：已发布公告（' + new Date(s.announce.time).toLocaleString('zh-CN', { hour12: false }) + '）';
+      } else {
+        $('annStatus').textContent = '当前：无公告';
+      }
+    }).catch(function (err) {
+      if (err.message.indexOf('登录') !== -1) { token = null; showLogin(); }
+    });
+  }
+
+  $('annSave').addEventListener('click', function () {
+    var text = $('annText').value.trim();
+    if (!text) { msg($('annMsg'), '公告内容不能为空', 0); return; }
+    api('POST', '/api/site/announce', { text: text })
+      .then(function () { msg($('annMsg'), '公告已发布，官网刷新即可看到 ✓', 1); refresh(); })
+      .catch(function (err) { msg($('annMsg'), err.message, 0); });
+  });
+
+  $('annClear').addEventListener('click', function () {
+    if (!confirm('确定撤下当前公告吗？')) return;
+    api('DELETE', '/api/site/announce')
+      .then(function () { $('annText').value = ''; msg($('annMsg'), '公告已撤下', 1); refresh(); })
+      .catch(function (err) { msg($('annMsg'), err.message, 0); });
+  });
+
+  $('pwdForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var np = $('pwdNew').value, np2 = $('pwdNew2').value;
+    if (np !== np2) { msg($('pwdMsg'), '两次输入的新密码不一致', 0); return; }
+    api('POST', '/api/site/passwd', {
+      oldPassword: $('pwdOld').value, newPassword: np
+    }).then(function () {
+      msg($('pwdMsg'), '密码修改成功，下次请用新密码登录 ✓', 1);
+      $('pwdOld').value = ''; $('pwdNew').value = ''; $('pwdNew2').value = '';
+    }).catch(function (err) { msg($('pwdMsg'), err.message, 0); });
+  });
+
+  // 已有会话则直接进面板
+  if (token) {
+    api('GET', '/api/site/stats')
+      .then(function () { showPanel(); })
+      .catch(function () { token = null; showLogin(); });
+  } else {
+    showLogin();
+  }
+
+  // 背景彩球（与官网一致的低成本版本）
+  var canvas = document.getElementById('bg-lines');
+  if (canvas && canvas.getContext && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+    var ctx = canvas.getContext('2d');
+    var PALETTE = [[255,158,195],[255,223,142],[142,202,230],[116,198,157],[244,162,97]];
+    var orbs = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize); resize();
+    for (var i = 0; i < 6; i++) {
+      orbs.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+        r: 120 + Math.random() * 180, vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .25,
+        alpha: .05 + Math.random() * .05, color: PALETTE[i % PALETTE.length] });
+    }
+    (function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      orbs.forEach(function (o) {
+        o.x += o.vx; o.y += o.vy;
+        if (o.x < -o.r) o.x = canvas.width + o.r;
+        if (o.x > canvas.width + o.r) o.x = -o.r;
+        if (o.y < -o.r) o.y = canvas.height + o.r;
+        if (o.y > canvas.height + o.r) o.y = -o.r;
+        var c = o.color;
+        var g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.r);
+        g.addColorStop(0, 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + o.alpha + ')');
+        g.addColorStop(1, 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',0)');
+        ctx.beginPath(); ctx.arc(o.x, o.y, o.r, 0, Math.PI * 2);
+        ctx.fillStyle = g; ctx.fill();
+      });
+      requestAnimationFrame(draw);
+    })();
+  }
+})();
+</script>
+</body>
+</html>

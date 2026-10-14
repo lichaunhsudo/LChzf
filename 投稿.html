@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="黎川树洞投稿审核标准 v1.0 · 审核不是为了拦你，是为了让内容能被更多人安全地看到">
+<meta name="theme-color" content="#1c4532">
+<link rel="icon" href="avatar.jpg" type="image/jpeg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="黎川树洞 · 投稿审核标准 v1.0">
+<meta property="og:description" content="审核不是为了拦你，是为了让内容能被更多人安全地看到">
+<title>投稿审核标准 · 黎川树洞</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- 流光背景 -->
+<canvas id="bg-lines"></canvas>
+
+<!-- 卡通顶栏 -->
+<div class="topbar">
+  <div class="top-left">
+    <a class="top-login" href="admin.html" title="管理员登入">🔑 登入</a>
+    <a class="brand" href="index.html">黎川<span>树洞</span></a>
+  </div>
+  <nav>
+    <a href="投稿.html">投稿标准</a>
+    <a href="赞助.html">赞助</a>
+  </nav>
+</div>
+
+<div class="doc">
+
+<!-- 站点公告（管理员在面板发布后显示） -->
+<div id="announce-bar" class="announce hidden">
+  <span class="a-icon">📢</span>
+  <span class="a-text"></span>
+  <button class="a-close" type="button" aria-label="关闭公告">×</button>
+</div>
+
+  <header class="doc-header">
+    <div class="doc-icon">🌙</div>
+    <h1>黎川树洞 · 投稿审核标准</h1>
+    <p class="doc-sub">审核不是为了拦你，是为了让内容能被更多人安全地看到</p>
+    <p class="doc-meta">版本 v1.0 ｜ 发布日期 2026 年 10 月 ｜ 黎川树洞 管理组</p>
+    <span class="doc-badge">📌 本文件为群文件正式版，任何违规投稿的处理依据</span>
+  </header>
+
+  <nav class="panel toc" aria-label="目录">
+    <h2>目录</h2>
+    <ul>
+      <li><a href="#preface">前言 · 审核不是为了拦你</a></li>
+      <li><a href="#part1">第一部分 · 绝不发布（红线）</a></li>
+      <li><a href="#part2">第二部分 · 视情况处理（灰区）</a></li>
+      <li><a href="#part3">第三部分 · 投稿建议（鼓励性条款）</a></li>
+      <li><a href="#part4">第四部分 · 审核流程</a></li>
+      <li><a href="#part5">第五部分 · 紧急情况通道</a></li>
+      <li><a href="#part6">第六部分 · 常见 Q&amp;A</a></li>
+      <li><a href="#appendix">附录 · 常见误删原因速查</a></li>
+      <li><a href="#ending">结语</a></li>
+      <li><a href="#checklist">附赠 · 投稿人自查清单（1 分钟版）</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <section class="doc-sec" id="preface">
+      <h2>前言 · 审核不是为了拦你</h2>
+      <p>投稿审核不是拦截，是为了让内容能被更多人安全地看到。</p>
+      <p>我们的目标只有一个：<strong>你的话被看到，同时你也被保护住。</strong></p>
+      <p>这份标准写清楚，是为了让你知道：</p>
+      <ul class="plain">
+        <li>什么一定会发</li>
+        <li>什么一定不会发</li>
+        <li>什么我们会和你商量着来</li>
+      </ul>
+      <div class="box green">
+        <strong>✨ 最重要的一句话：</strong>如果你不确定某条内容能不能发——<strong>先发出来</strong>。我们更愿意在审核后给你反馈，而不是你猜来猜去不敢发。
+      </div>
+    </section>
+
+    <section class="doc-sec" id="part1">
+      <h2>第一部分 · 绝不发布（红线）</h2>
+      <p>以下内容无论什么原因、无论什么形式，一律不发布。这不是商量。</p>
+
+      <h3>🔴 一、涉及违法与敏感</h3>
+      <ol>
+        <li>涉政内容：涉及国家、政府、公共事件的评论、传闻、立场</li>
+        <li>涉黄内容：露骨色情描写、性暗示图片、成人内容导流</li>
+        <li>涉毒 / 涉赌 / 涉暴内容：任何形式的描写或暗示</li>
+        <li>封建迷信、恐怖惊悚、血腥暴力的具体内容</li>
+        <li>违法交易、代写代发、有偿接单、卖课、卖服务</li>
+      </ol>
+
+      <h3>🔴 二、涉及可识别身份（最重要的红线）</h3>
+      <p>以下任何信息出现在投稿里，我们会先做脱敏处理，处理不了就不发：</p>
+      <ol>
+        <li>真实姓名、学校 + 具体班级、家庭住址、电话号码、微信号、QQ 号</li>
+        <li>能直接定位到人的照片（清晰人脸、可识别的校服 + 校徽、独特纹身/伤疤）</li>
+        <li>具体到时间地点的事件细节（"周三下午第三节课在某教室"这种组合信息）</li>
+        <li>他人的截图、聊天记录（未经对方同意）</li>
+        <li>任何"扒皮 / 人肉 / 挖身份"类内容——无论指向谁</li>
+      </ol>
+      <div class="box red">
+        <strong>📌 投稿人自查：</strong>如果投稿里出现别人能一眼认出来的信息，我们会打码。如果你希望被"完全截去"，请在投稿界面选"完全截去"档。
+      </div>
+
+      <h3>🔴 三、涉及他人隐私与名誉</h3>
+      <ol>
+        <li>未经当事人同意的爆料（"某某某其实……"）</li>
+        <li>恶意人身攻击、诅咒、辱骂特定个人</li>
+        <li>冒充他人投稿，或以他人身份发声</li>
+        <li>转发树洞内已有的投稿内容（含截图、二次传播）</li>
+        <li>涉及未成年人的不当内容（无论指向谁）</li>
+      </ol>
+
+      <h3>🔴 四、商业与导流</h3>
+      <ol>
+        <li>任何形式的广告、导流、拉群</li>
+        <li>卖货、卖服务、卖课、卖资源</li>
+        <li>引导私信 / 加微信 / 加 QQ 号</li>
+        <li>冒充管理或群主</li>
+      </ol>
+    </section>
+
+    <section class="doc-sec" id="part2">
+      <h2>第二部分 · 视情况处理（灰区）</h2>
+      <p>以下内容可以发，但我们可能会和你商量。以下每一条都会附一句"我们的做法"。</p>
+
+      <h3>🟡 一、校园 / 老师吐槽</h3>
+      <div class="box yellow">
+        <strong>处理方式：</strong>可以发，但建议加一句"仅供参考 / 仅为个人观点"，且不做指名道姓的具体指认。
+      </div>
+      <p>我们理解"吐槽老师"是本地学生的核心情绪出口。但如果吐槽变成"点名道姓的公开审判"，投稿人也会陷入被动——保护投稿人的最好办法是保护投稿人自己。</p>
+      <div class="box">
+        <strong>💬 举例（参考话术）：</strong>"某老师上周…… 这只是我个人经历，不知道具体情况如何，仅供参考"
+      </div>
+
+      <h3>🟡 二、恋爱情感类细节</h3>
+      <div class="box yellow">
+        <strong>处理方式：</strong>可以发，涉及双方身份的描述做模糊化（"他/她"、"某同学"）；涉及第三方具体信息（照片、聊天记录）会脱敏。
+      </div>
+      <p>情感类是树洞的老本行，我们不会拦。但如果投稿里出现了能定位到具体人的信息，我们会先打码，处理不了再发。</p>
+
+      <h3>🟡 三、家庭矛盾类</h3>
+      <div class="box yellow">
+        <strong>处理方式：</strong>可以发，涉及家人姓名/照片一律脱敏。若涉及家暴/虐待/严重伤害，走紧急通道（见第五部分）。
+      </div>
+
+      <h3>🟡 四、传闻 / 打听类</h3>
+      <div class="box yellow">
+        <strong>处理方式：</strong>可以发，但建议投稿人标注"听闻 / 想确认"，避免被解读为爆料。
+      </div>
+      <p>"听说 XXX 是怎么回事？"这种打听帖可以发，但如果是"XXX 做了 XXX"这种断言，我们更倾向于请你改成疑问句。</p>
+
+      <h3>🟡 五、争议话题（性别、校园事件等）</h3>
+      <div class="box yellow">
+        <strong>处理方式：</strong>可以发，但要求描述性、非立场性。避免"我觉得男生/女生都……"这种整体性评判。
+      </div>
+      <p>树洞不是公共辩论场。你可以发你的感受，但请不要让别人的感受被你的感受替代。</p>
+
+      <h3>🟡 六、求助 / 医疗 / 法律 / 心理专业问题</h3>
+      <div class="box yellow">
+        <strong>处理方式：</strong>可以发，但我们会在回复区提示专业资源（热线、渠道），并尽量不做诊断。
+      </div>
+      <p>树洞不是心理咨询室，也不是法律援助。我们能做的是让你的问题被看见，然后指向专业的地方。</p>
+
+      <h3>🟡 七、极端情绪表达（自伤 / 轻生倾向）</h3>
+      <div class="box yellow">
+        <strong>处理方式：</strong>会优先发布，同时私下联系投稿人做关怀跟进。
+      </div>
+      <p>如果你正在经历这样的事，请把这份投稿当成一个求救信号。我们不会删你的内容，但会尝试联系你。同时，请务必拨打：<strong>12356 / 120 / 110</strong>。</p>
+
+      <h3>🟡 八、长文 / 多段 / 图文混排</h3>
+      <div class="box yellow">
+        <strong>处理方式：</strong>可以发，但我们可能会分段发布或压缩排版以提升可读性。原稿的完整表达会保留。
+      </div>
+    </section>
+
+    <section class="doc-sec" id="part3">
+      <h2>第三部分 · 投稿建议（鼓励性条款）</h2>
+      <p>这些不是必须，但会让你的投稿更顺畅地被看到。</p>
+
+      <h3>✅ 关于匿名</h3>
+      <ul class="plain">
+        <li>默认匿名强度建议选"涂抹"（比打码更彻底）</li>
+        <li>涉及熟人圈的信息，建议直接选"完全截去"</li>
+        <li>投稿前自查：如果朋友列表里有能对上号的人，请用最高档</li>
+      </ul>
+
+      <h3>✅ 关于吐槽</h3>
+      <ul class="plain">
+        <li>涉及老师 / 同学 / 家人，建议加一句"仅供参考 / 仅为个人经历"</li>
+        <li>避免使用具体姓名、班级、照片</li>
+        <li>争议性话题尽量用描述性语言，不用整体性评判</li>
+      </ul>
+
+      <h3>✅ 关于求助</h3>
+      <ul class="plain">
+        <li>说清楚"想问什么"比"发生了什么"更重要</li>
+        <li>长文可分段，我们不会拒收长文</li>
+      </ul>
+
+      <h3>✅ 关于求助类内容（尤其是自伤 / 轻生）</h3>
+      <ul class="plain">
+        <li>请同时告诉一位你信任的人（家人、朋友、老师）</li>
+        <li>如果情况紧急，请直接拨打 12356 / 120 / 110</li>
+        <li>树洞不是替代专业资源的场所</li>
+      </ul>
+
+      <h3>✅ 关于转载</h3>
+      <ul class="plain">
+        <li>树洞内容不搬运、不截图、不传播到群外</li>
+        <li>想分享某条内容给别人？请让对方自己进来</li>
+        <li>二次传播是树洞最大的伤害来源</li>
+      </ul>
+    </section>
+
+    <section class="doc-sec" id="part4">
+      <h2>第四部分 · 审核流程</h2>
+
+      <h3>📋 常规流程</h3>
+      <div class="flow">
+        <span class="step">你投稿</span><span class="arr">→</span>
+        <span class="step">24 小时内审核</span><span class="arr">→</span>
+        <span class="step">发布 或 拒绝附说明</span><span class="arr">→</span>
+        <span class="step">可申诉</span>
+      </div>
+
+      <h3>📋 拒绝时你会收到什么</h3>
+      <p>如果审核未通过，你会收到一条私信或群内回复：</p>
+      <div class="box">
+        关于 📌 #XXX 号投稿<br>
+        未通过审核：违反《投稿审核标准》第 X 条<br>
+        原因：[具体说明]<br>
+        如需申诉，请私信管理，24 小时内回复。
+      </div>
+      <p>为什么给说明？因为"沉默地吞掉投稿"是最伤人的审核方式。我们希望你知道错在哪里，而不是只知道被拒了。</p>
+
+      <h3>📋 申诉流程</h3>
+      <div class="flow">
+        <span class="step">收到拒绝</span><span class="arr">→</span>
+        <span class="step">24 小时内私信管理申诉</span><span class="arr">→</span>
+        <span class="step">24 小时内复审</span><span class="arr">→</span>
+        <span class="step">反馈结果</span>
+      </div>
+
+      <p><strong>什么情况可以申诉？</strong></p>
+      <ul class="plain">
+        <li>你认为审核判断有误</li>
+        <li>你认为内容被误删（例如被误判为辱骂、被误判为爆料）</li>
+        <li>你认为脱敏方式不合适</li>
+        <li>任何你觉得不合理的地方</li>
+      </ul>
+      <p><strong>申诉的回复承诺：</strong>24 小时内必回；即使再次拒绝，也会附上第二次说明。</p>
+    </section>
+
+    <section class="doc-sec" id="part5">
+      <h2>第五部分 · 紧急情况通道</h2>
+      <p>以下情形会绕过常规审核，走加急流程：</p>
+
+      <h3>🚨 一、涉及自伤 / 轻生倾向</h3>
+      <ul class="plain">
+        <li>优先发布</li>
+        <li>私下联系投稿人做关怀</li>
+        <li>提示专业资源</li>
+      </ul>
+
+      <h3>🚨 二、涉及人身安全的求助</h3>
+      <ul class="plain">
+        <li>优先发布</li>
+        <li>提示 120 / 110 / 12356</li>
+        <li>必要时通知投稿人所在地的同学/朋友</li>
+      </ul>
+
+      <h3>🚨 三、涉及未成年人保护</h3>
+      <ul class="plain">
+        <li>内容会被脱敏到无法识别具体人</li>
+        <li>必要时不上架，但会私下联系相关方</li>
+      </ul>
+
+      <h3>🚨 四、涉及紧急事件</h3>
+      <ul class="plain">
+        <li>群内紧急事件（比如某人出事）会先核实再发布</li>
+        <li>未经核实的紧急情况不发布，但会私下提醒知情者</li>
+      </ul>
+    </section>
+
+    <section class="doc-sec" id="part6">
+      <h2>第六部分 · 常见 Q&amp;A</h2>
+
+      <div class="qa">
+        <p class="q">Q：什么是"人肉"或"扒皮"？</p>
+        <p class="a">A：为了挖掘某个投稿者/被提及者的身份，通过信息拼凑、追问、截图比对、私下询问等方式识别其真实身份——无论目的是否"善意"。</p>
+      </div>
+      <div class="qa">
+        <p class="q">Q：为什么我的吐槽被拒了？</p>
+        <p class="a">A：可能是内容里出现了能直接定位到具体老师/同学的信息（如"高三某班某老师"）。请改用"某老师""某位老师"这类模糊表述。</p>
+      </div>
+      <div class="qa">
+        <p class="q">Q：怎么判断是否涉及他人身份？</p>
+        <p class="a">A：一个简单的自查——如果这条投稿里出现的信息组合起来，本地学生里能对应到某一个人，那就有风险。宁可多打码，不要少打码。</p>
+      </div>
+      <div class="qa">
+        <p class="q">Q："仅供参考"这个建议是必须的吗？</p>
+        <p class="a">A：不是必须。但如果你的内容可能被理解成"公开审判某人"，加这句话能同时保护你和被提及的人。</p>
+      </div>
+      <div class="qa">
+        <p class="q">Q：审核要多久？</p>
+        <p class="a">A：常规投稿 24 小时内反馈。紧急情况会加急。</p>
+      </div>
+      <div class="qa">
+        <p class="q">Q：被拒了可以申诉吗？</p>
+        <p class="a">A：可以，见第四部分。我们承诺 24 小时内必回。</p>
+      </div>
+      <div class="qa">
+        <p class="q">Q：如果我发了违规内容会被怎么处理？</p>
+        <p class="a">A：首次提醒 + 修改后发布；反复违规会限制投稿权限；触碰红线（人肉、爆料、泄露他人信息）会直接移出。</p>
+      </div>
+      <div class="qa">
+        <p class="q">Q：我能匿名投稿吗？</p>
+        <p class="a">A：可以，而且是默认。你甚至不需要告诉我们你是谁。</p>
+      </div>
+    </section>
+
+    <section class="doc-sec" id="appendix">
+      <h2>附录 · 常见误删原因速查</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>场景</th><th>常见误删原因</th><th>建议改法</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>吐槽老师</td><td>指名道姓</td><td>用"某老师""高三某位老师"</td></tr>
+            <tr><td>情感类</td><td>出现对方照片/微信</td><td>打码或"完全截去"</td></tr>
+            <tr><td>求助问答</td><td>内容过短、无信息量</td><td>补充"想问什么"</td></tr>
+            <tr><td>事件传闻</td><td>断言式描述</td><td>改成疑问句"听说……"</td></tr>
+            <tr><td>家庭矛盾</td><td>涉及家人姓名/照片</td><td>打码处理</td></tr>
+            <tr><td>求助自伤</td><td>未留可联系的渠道</td><td>私下告诉我们，我们联系你</td></tr>
+            <tr><td>转载他人内容</td><td>二次传播</td><td>让对方自己进来发</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="doc-sec" id="ending">
+      <h2>结语</h2>
+      <p>树洞不完美，审核也不完美。我们更愿意在审核之后告诉你为什么，而不是审核之前让你猜。</p>
+      <p>如果这份标准里还有什么没覆盖的地方，告诉我们。这份文档会持续更新。</p>
+      <p class="doc-sign">—— 黎川树洞 管理组</p>
+      <p class="doc-meta">版本 v1.0 ｜ 更新日期 2026 年 10 月 ｜ 下一次回顾 2026 年 12 月</p>
+    </section>
+
+    <section class="doc-sec" id="checklist">
+      <h2>附赠 · 投稿人自查清单（1 分钟版）</h2>
+      <p>推荐贴在群公告或投稿入口顶部。</p>
+      <div class="box green">
+        <strong>━━━ 投稿前 1 分钟自查</strong>
+        <ul class="plain check-list">
+          <li>投稿里有没有能一眼认出某人的信息？（姓名 / 班级 / 照片 / 微信 QQ）</li>
+          <li>吐槽类内容加"仅供参考"了吗？</li>
+          <li>匿名强度选的是"涂抹"或"完全截去"吗？</li>
+          <li>涉及自伤/轻生，请同时告诉一位信任的人</li>
+          <li>不确定能不能发？——先发出来。</li>
+        </ul>
+      </div>
+      <p>审核 24 小时内反馈。被拒了可以申诉，24 小时内必回。</p>
+      <p>任何情况都可以告诉管理——我们听得见，也会改。</p>
+    </section>
+
+    <div style="text-align:center;"><a class="back" href="index.html">← 返回主页</a></div>
+  </main>
+
+  <footer>© <span id="year">2026</span> 黎川树洞 · 投稿审核标准 v1.0</footer>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
